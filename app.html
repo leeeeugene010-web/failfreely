@@ -188,7 +188,7 @@ textarea{min-height:60px;resize:vertical}
 
 footer{max-width:1120px;margin:0 auto;padding:26px 24px 70px;border-top:1px solid var(--line);
   display:flex;gap:9px;flex-wrap:wrap;align-items:center}
-footer .fnote{font-family:var(--data);font-size:10.5px;color:var(--muted);margin-right:auto;line-height:1.6}
+footer{justify-content:center}
 footer button{border:1px solid var(--line-2);background:var(--surface);color:var(--ink-soft);border-radius:99px;padding:6px 13px;font-size:12px}
 footer button:hover{background:var(--bg);color:var(--ink)}
 
@@ -235,13 +235,6 @@ footer button:hover{background:var(--bg);color:var(--ink)}
 
       <div class="side">
         <div class="card">
-          <h3 id="dLabel">—</h3>
-          <div id="dayList"></div>
-          <div id="deckSlot"></div>
-          <button class="btn" id="addBtn">+ 기록하기</button>
-          <button class="btn alt" id="deckBtn" style="margin-top:8px">오늘의 도전 뽑기</button>
-        </div>
-        <div class="card" style="margin-top:16px">
           <h3>결과 기다리는 중 — <span id="pendN">0</span></h3>
           <div id="pendList"></div>
         </div>
@@ -272,8 +265,8 @@ footer button:hover{background:var(--bg);color:var(--ink)}
       <p>아무튼, 저는 다시 움직여보기로 했어요. 그래서 이걸 만들었어요.</p>
 
       <h3>실패를 다르게 세어보기</h3>
-      <p>실패가 나쁜 거라고 생각하지 않아요. 실패는 적어도 <b>해봤다는 영수증</b>이니까요.</p>
-      <p>그런데 우리는 이상하게도 성공한 것만 세고, 실패한 건 지워버리려고 해요. 그래서 저는 그 영수증들이 눈에 보이게 쌓였으면 했어요.</p>
+      <p>실패가 나쁜 거라고 생각하지 않아요. 실패는 적어도 <b>해봤다는 증거</b>니까요.</p>
+      <p>그런데 우리는 이상하게도 성공한 것만 세고, 실패한 건 지워버리려고 해요. 그래서 저는 그 증거들이 눈에 보이게 쌓였으면 했어요.</p>
       <p>여기 있는 기록 하나하나는 아무것도 하지 않은 날이 아니라, <b>뭔가를 해본 날</b>이에요. 지원서를 넣은 날도, 처음 보는 사람에게 말을 건 날도, 무서워서 미뤄두었던 발표 메일을 결국 열어본 날도요.</p>
       <p>결과가 좋았는지는 중요하지 않아요. 일단 해봤다면, 여기에는 한 칸이 생겨요.</p>
 
@@ -281,17 +274,18 @@ footer button:hover{background:var(--bg);color:var(--ink)}
       <p><b>1. 마음을 내서 해본 걸 기록해요</b><br>
       대단한 도전일 필요는 없어요. 지원서에 지원한 것도, 모르는 사람에게 길을 물어본 것도, 미뤄두었던 전화를 건 것도 들어가요. 내가 조금이라도 용기를 내서 해본 일이라면 충분해요.</p>
       <p><b>2. 두 가지를 매겨요</b><br>
-      <b>용기</b> — 하기 전에 얼마나 무서웠는지. <b>타격</b> — 하고 나서 얼마나 힘들었는지.<br>
+      <b>용기</b> — 하기 전에 얼마나 무서웠는지.<br>
+      <b>타격</b> — 하고 나서 얼마나 힘들었는지.<br>
       처음에는 별거 아니라고 생각했던 일이 막상 해보니 꽤 힘들 수도 있고, 엄청 무서울 것 같았던 일이 생각보다 괜찮을 수도 있어요. 그 차이도 기록해두려고 해요.</p>
       <p><b>3. 결과가 나중에 오면 열어둬요</b><br>
-      지원 결과처럼 나중에 알게 되는 일이 있어요. 못 열어본 발표 메일을 며칠 뒤 결국 열어보는 것도 하나의 도전이에요. 결과가 무엇이든, 그날의 기록은 사라지지 않아요.</p>
+      지원 결과처럼 나중에 알게 되는 일이 있어요. 못 열어본 발표 메일을 며칠 뒤 결국 열어보는 것도 하나의 도전이에요.</p>
 
       <h3>일부러 넣지 않은 것</h3>
       <ul>
         <li><b>성공률.</b> 어디에도 없어요.</li>
         <li><b>연속 기록, 불꽃 표시.</b> 기록이 끊겼다고 알려주지 않아요.</li>
         <li><b>랭킹과 다른 사람의 숫자.</b> 누가 더 많이 했는지도 보여주지 않아요.</li>
-        <li><b>안 한 날은 실패한 날이 아니에요.</b> 그냥 아직 빈칸인 날이에요.</li>
+        <li><b>안 한 날은 실패한 날이 아니에요.</b></li>
       </ul>
 
       <h3>기록은 어디에 있나요?</h3>
@@ -306,7 +300,6 @@ footer button:hover{background:var(--bg);color:var(--ink)}
 </main>
 
 <footer>
-  <span class="fnote" id="fnote">이 기기에 저장돼요. 아무 데도 전송되지 않아요.</span>
   <button id="bakBtn">백업</button>
   <button id="demoBtn">예시 채우기</button>
   <button id="clrBtn">전체 삭제</button>
@@ -400,9 +393,6 @@ async function load(){
     nextId=p.nextId||DATA.length+1;
     if(p.weekGoal) weekGoal=p.weekGoal;
   }catch(e){} }
-  if(mode==="memory"){
-    document.getElementById("fnote").textContent="이 브라우저가 저장을 막고 있어요. 아래 백업으로 파일을 받아두세요.";
-  }
 }
 
 /* ---------- modal ---------- */
@@ -455,7 +445,7 @@ function renderCal(){
       k.kind==="try"
         ? `<i class="dot ${k.r.tier.toLowerCase()}" style="background:${col(k.r.cat)}"></i>`
         : `<i class="dot ${k.r.tier.toLowerCase()} ring" style="border-color:${col(k.r.cat)}"></i>`).join("")}</span>`;
-    b.onclick=()=>{ selected=ds; renderCal(); renderSide(); };
+    b.onclick=()=>{ selected=ds; renderCal(); openDay(ds); };
     g.appendChild(b);
   }
   const p=weekPoints();
@@ -469,10 +459,8 @@ function renderCal(){
 }
 
 /* ---------- side panel ---------- */
-function renderSide(){
-  document.getElementById("dLabel").textContent=fmt(selected)+(selected===TODAY?" · 오늘":"");
-  const marks=marksOn(selected);
-  document.getElementById("dayList").innerHTML = marks.length ? marks.map(k=>{
+function dayRecHTML(marks){
+  return marks.map(k=>{
     const r=k.r, isR=k.kind==="reck";
     return `<div class="rec">
       <div class="rec-t"><b>${isR?"결과 확인 — ":""}${esc(r.title)}</b>
@@ -483,10 +471,24 @@ function renderSide(){
         <span>${TIERS[r.tier]}</span></div>
       ${(isR||!isOpen(r))&&r.learned?`<div class="rec-note">${esc(r.learned)}</div>`:""}
     </div>`;
-  }).join("") : (DATA.length
-      ? `<p class="empty-note">아직 없어요. 안 한 날은 실패한 날이 아니라 그냥 아직 빈 칸이에요.</p>`
-      : `<p class="empty-note">아직 기록이 없어요. 날짜를 눌러서 해본 것 하나를 적어보세요. 길 물어본 것처럼 작아도 괜찮아요.</p>`);
+  }).join("");
+}
 
+/* 날짜를 누르면 그 날짜 창이 열린다 */
+function openDay(ds){
+  const marks=marksOn(ds);
+  openModal(`
+    <h3>${fmt(ds)}</h3>
+    <div class="when">${ds===TODAY?"오늘":""}</div>
+    ${marks.length ? dayRecHTML(marks)
+      : `<p class="empty-note" style="text-align:center">아직 없어요.</p>`}
+    <button class="btn" id="dayAdd" style="margin-top:6px">+ 이 날짜에 기록하기</button>
+    <button class="btn alt" id="dayDeck" style="width:100%;margin-top:8px">오늘의 도전 뽑기</button>`);
+  document.getElementById("dayAdd").onclick=()=>{ draft=blank(); paintAdd(); };
+  document.getElementById("dayDeck").onclick=drawCard;
+}
+
+function renderSide(){
   const pend=DATA.filter(isOpen);
   document.getElementById("pendN").textContent=pend.length;
   document.getElementById("pendList").innerHTML = pend.length ? pend.map(r=>`
@@ -552,7 +554,6 @@ function paintAdd(){
     closeModal(); save(); renderAll();
   };
 }
-document.getElementById("addBtn").onclick=()=>{ draft=blank(); paintAdd(); };
 
 /* ---------- weekly goal ---------- */
 document.getElementById("goalBtn").onclick=()=>{
@@ -579,17 +580,19 @@ document.getElementById("goalBtn").onclick=()=>{
 /* ---------- challenge deck ---------- */
 function drawCard(){
   const c=DECK[Math.floor(Math.random()*DECK.length)];
-  document.getElementById("deckSlot").innerHTML=`
-    <div class="deck"><div class="lv">용기 ${c.lv} / 5</div><p>${esc(c.t)}</p>
-      <button class="btn alt sm" id="dTake">이걸로 기록하기</button>
-      <button class="btn alt sm" id="dAgain">다시 뽑기</button></div>`;
+  openModal(`
+    <h3>오늘의 도전</h3>
+    <div class="when">${fmt(selected)}${selected===TODAY?" · 오늘":""}</div>
+    <div class="deck"><div class="lv">용기 ${c.lv} / 5</div><p>${esc(c.t)}</p></div>
+    <button class="btn" id="dTake">이걸로 기록하기</button>
+    <button class="btn alt" id="dAgain" style="width:100%;margin-top:8px">다시 뽑기</button>
+    <button class="btn alt sm" id="dBack" style="width:100%;margin-top:8px">돌아가기</button>`);
   document.getElementById("dTake").onclick=()=>{
-    draft=blank(); draft.title=c.t; draft.courage=c.lv;
-    document.getElementById("deckSlot").innerHTML=""; paintAdd();
+    draft=blank(); draft.title=c.t; draft.courage=c.lv; paintAdd();
   };
   document.getElementById("dAgain").onclick=drawCard;
+  document.getElementById("dBack").onclick=()=>openDay(selected);
 }
-document.getElementById("deckBtn").onclick=drawCard;
 
 /* ---------- reckoning ---------- */
 function openReck(id){
