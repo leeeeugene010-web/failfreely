@@ -1,6 +1,6 @@
 /* Fail Freely service worker — offline support.
    Bump CACHE version when you update index.html so visitors get the new file. */
-const CACHE = "failfreely-v2";
+const CACHE = "failfreely-v4";
 const ASSETS = [
   "./",
   "./index.html",
