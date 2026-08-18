@@ -105,7 +105,13 @@ nav button.on{background:var(--ink);color:#fff}
 .btn{border:1px solid var(--ink);background:var(--ink);color:#fff;border-radius:14px;padding:11px 15px;font-size:13.5px;font-weight:500;width:100%}
 .btn.alt{background:var(--surface);color:var(--ink);border-color:var(--line-2)}
 .btn.alt:hover{background:var(--bg)}
+.btn.danger{background:#FFF6F6;color:#A45D6B;border-color:#E8C8CD}
+.btn.danger:hover{background:#FDEDED}
 .btn.sm{width:auto;padding:7px 12px;font-size:12.5px}
+
+.rec-actions,.record-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.rec-actions{justify-content:flex-end;gap:5px;margin-top:7px}
+.rec-actions .btn.sm{padding:4px 9px;font-size:11.5px;border-radius:10px}
 
 .pend{border:1px dashed var(--line-2);border-radius:14px;padding:11px 13px;margin-bottom:8px;background:var(--surface)}
 .pend b{font-size:13.5px;font-weight:600;display:block}
@@ -144,7 +150,8 @@ textarea{min-height:60px;resize:vertical}
 .arch{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;align-items:start}
 .acard{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
 .ahead{width:100%;text-align:left;background:transparent;border:0;padding:16px 17px}
-.ahead h4{margin:7px 0 0;font-size:15.5px;font-weight:600;line-height:1.35}
+.archive-title{display:flex;align-items:flex-start;gap:8px}
+.ahead h4{margin:0;min-width:0;flex:1;font-size:15.5px;font-weight:400;line-height:1.35}
 .ahead .m{font-family:var(--data);font-size:10.5px;color:var(--muted);margin-top:9px;display:flex;gap:9px;flex-wrap:wrap}
 .abody{display:none;padding:0 17px 16px;font-size:13.5px;color:var(--ink-soft)}
 .acard.open .abody{display:block}
@@ -437,6 +444,20 @@ function notice(title,body){
   document.getElementById("okBtn").onclick=closeModal;
 }
 
+function bindRecordActions(root=document){
+  root.querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>openEdit(+b.dataset.edit));
+  root.querySelectorAll("[data-delete]").forEach(b=>b.onclick=()=>deleteRecord(+b.dataset.delete));
+}
+
+function deleteRecord(id){
+  const r=DATA.find(x=>x.id===id); if(!r) return;
+  ask("이 기록을 삭제할까요?",`“${esc(r.title)}” 기록이 삭제되고 되돌릴 수 없어요.`,`삭제하기`,()=>{
+    DATA=DATA.filter(x=>x.id!==id);
+    track("entry_deleted");
+    save(); renderAll();
+  });
+}
+
 /* ---------- calendar ---------- */
 function renderCal(){
   const y=cursor.getFullYear(), m=cursor.getMonth();
@@ -480,6 +501,10 @@ function dayRecHTML(marks){
         ${isR?`<span>타격 ${r.impact}/5</span>`:(isOpen(r)?`<span>결과 대기 중</span>`:`<span>타격 ${r.impact}/5</span>`)}
         <span>${TIERS[r.tier]}</span></div>
       ${(isR||!isOpen(r))&&r.learned?`<div class="rec-note">${esc(r.learned)}</div>`:""}
+      <div class="rec-actions">
+        <button class="btn alt sm" data-edit="${r.id}">수정</button>
+        <button class="btn danger sm" data-delete="${r.id}">삭제</button>
+      </div>
     </div>`;
   }).join("");
 }
@@ -494,8 +519,9 @@ function openDay(ds){
       : `<p class="empty-note" style="text-align:center">아직 없어요.</p>`}
     <button class="btn" id="dayAdd" style="margin-top:6px">+ 이 날짜에 기록하기</button>
     <button class="btn alt" id="dayDeck" style="width:100%;margin-top:8px">오늘의 도전 뽑기</button>`);
-  document.getElementById("dayAdd").onclick=()=>{ draft=blank(); paintAdd(); };
+  document.getElementById("dayAdd").onclick=()=>{ editingId=null; draft=blank(); paintAdd(); };
   document.getElementById("dayDeck").onclick=drawCard;
+  bindRecordActions(sheet);
 }
 
 function renderSide(){
@@ -511,7 +537,15 @@ function renderSide(){
 
 /* ---------- add form ---------- */
 let draft=null;
+let editingId=null;
 const blank=()=>({title:"",tier:"S",cat:"나",courage:3,impact:1,unknown:false,stage:0,learned:"",showMore:false,impactSet:false});
+function openEdit(id){
+  const r=DATA.find(x=>x.id===id); if(!r) return;
+  editingId=id;
+  draft={title:r.title,tier:r.tier,cat:r.cat,courage:r.courage||3,impact:r.impact||1,
+    unknown:isOpen(r),stage:r.stage||0,learned:r.learned||"",showMore:true,impactSet:true};
+  paintAdd();
+}
 function seg(name,items,cur,cls=""){
   return `<div class="seg ${cls}">`+items.map(([v,l])=>
     `<button type="button" data-seg="${name}" data-val="${v}" class="${String(cur)===String(v)?"on":""}">${l}</button>`).join("")+`</div>`;
@@ -519,9 +553,13 @@ function seg(name,items,cur,cls=""){
 function stash(){ const t=document.getElementById("fT"), l=document.getElementById("fL");
   if(t) draft.title=t.value; if(l) draft.learned=l.value; }
 function paintAdd(){
+  const editing=editingId!==null;
+  const record=editing?DATA.find(r=>r.id===editingId):null;
+  if(editing&&!record){ editingId=null; draft=blank(); return paintAdd(); }
+  const recordDate=record?record.date:selected;
   openModal(`
-    <h3>기록하기</h3>
-    <div class="when">${fmt(selected)}${selected===TODAY?" · 오늘":""}</div>
+    <h3>${editing?"기록 수정":"기록하기"}</h3>
+    <div class="when">${fmt(recordDate)}${recordDate===TODAY?" · 오늘":""}</div>
     <label for="fT">뭘 해봤나요</label>
     <input type="text" id="fT" value="${esc(draft.title)}" placeholder="있는 그대로 적어주세요">
     <label>얼마나 큰 도전이었나요</label>
@@ -542,7 +580,7 @@ function paintAdd(){
       <label for="fL">알게 된 것 <span class="opt">(선택)</span></label>
       <textarea id="fL" placeholder="뭘 잘못했나 말고, 뭘 알게 됐나를 적어요">${esc(draft.learned)}</textarea>`
       : `<button type="button" class="more" data-seg="showMore" data-val="1">+ 자세히 쓰기${draft.tier!=="S"?" — 어디까지 갔는지, 알게 된 것":" — 알게 된 것"}</button>`}
-    <button class="btn" id="fSave">캘린더에 추가</button>`);
+    <button class="btn" id="fSave">${editing?"수정사항 저장":"캘린더에 추가"}</button>`);
   sheet.querySelectorAll("[data-seg]").forEach(b=>b.onclick=()=>{
     stash();
     const k=b.dataset.seg, v=b.dataset.val;
@@ -556,6 +594,17 @@ function paintAdd(){
   document.getElementById("fSave").onclick=()=>{
     stash();
     if(!draft.title.trim()){ document.getElementById("fT").focus(); return; }
+    if(editingId!==null){
+      const r=DATA.find(x=>x.id===editingId); if(!r) return;
+      r.title=draft.title.trim(); r.tier=draft.tier; r.cat=draft.cat;
+      r.courage=draft.courage; r.stage=draft.stage; r.learned=draft.learned.trim();
+      r.impact=draft.unknown?null:draft.impact;
+      if(draft.unknown){ r.reck=null; r.noReply=false; }
+      track("entry_updated",{tier:r.tier,cat:r.cat,courage:r.courage});
+      editingId=null; draft=null;
+      closeModal(); save(); renderAll();
+      return;
+    }
     const wasEmpty = DATA.length===0;
     DATA.push({id:nextId++,title:draft.title.trim(),date:selected,tier:draft.tier,cat:draft.cat,
       courage:draft.courage,stage:draft.stage,impact:draft.unknown?null:draft.impact,
@@ -598,7 +647,7 @@ function drawCard(){
     <button class="btn alt" id="dAgain" style="width:100%;margin-top:8px">다시 뽑기</button>
     <button class="btn alt sm" id="dBack" style="width:100%;margin-top:8px">돌아가기</button>`);
   document.getElementById("dTake").onclick=()=>{
-    draft=blank(); draft.title=c.t; draft.courage=c.lv; paintAdd();
+    editingId=null; draft=blank(); draft.title=c.t; draft.courage=c.lv; paintAdd();
   };
   document.getElementById("dAgain").onclick=drawCard;
   document.getElementById("dBack").onclick=()=>openDay(selected);
@@ -658,8 +707,10 @@ function renderArc(){
   document.getElementById("arch").innerHTML = list.length ? list.map(r=>`
     <article class="acard">
       <button class="ahead" data-open aria-expanded="false">
-        <span class="chip" style="background:${col(r.cat)}">${r.cat}</span>
-        <h4>${esc(r.title)}</h4>
+        <div class="archive-title">
+          <span class="chip" style="background:${col(r.cat)}">${r.cat}</span>
+          <h4>${esc(r.title)}</h4>
+        </div>
         <span class="m"><span>${fmt(r.date)}</span><span>용기 ${r.courage}/5</span>
           <span>${isOpen(r)?"결과 대기 중":"타격 "+r.impact+"/5"}</span>
         </span>
@@ -668,11 +719,16 @@ function renderArc(){
         ${r.tier!=="S"&&r.stage!=null?`<dt>어디까지</dt><dd>${STAGES[r.stage]}${r.noReply?" · 답 없음":""}</dd>`:""}
         <dt>알게 된 것</dt><dd>${esc(r.learned)||"—"}</dd>
         ${r.reck?`<dt>결과 확인</dt><dd>${fmt(r.reck.date)} · 용기 ${r.reck.courage}/5</dd>`:""}
-      </dl></div>
+      </dl>
+      <div class="record-actions">
+        <button class="btn alt sm" data-edit="${r.id}">수정</button>
+        <button class="btn danger sm" data-delete="${r.id}">삭제</button>
+      </div></div>
     </article>`).join("") : `<p class="empty-note">여기엔 아직 없어요.</p>`;
   document.querySelectorAll("[data-open]").forEach(b=>b.onclick=()=>{
     const c=b.closest(".acard"); b.setAttribute("aria-expanded",c.classList.toggle("open"));
   });
+  bindRecordActions(document.getElementById("arch"));
 }
 
 /* ---------- insights ---------- */
