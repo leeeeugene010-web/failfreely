@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Fail Freely — an archive of things you tried anyway</title>
-<meta name="description" content="A calendar that counts attempts instead of outcomes. No success rate, no streaks, no leaderboard.">
+<title>Fail Freely — 그래도 해본 것들의 기록</title>
+<meta name="description" content="결과가 아니라 시도한 횟수를 세는 캘린더. 성공률도 연속 기록도 랭킹도 없습니다.">
 <meta property="og:title" content="Fail Freely">
 <meta property="og:description" content="A calendar that counts attempts instead of outcomes.">
 <link rel="manifest" href="./manifest.json">
@@ -21,24 +21,24 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..800,100,1&family=Karla:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&family=Baloo+2:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#FDF9F5; --surface:#FFFFFF; --ink:#4A4048; --ink-soft:#6E626C; --muted:#A3959C;
   --line:#EFE5DE; --line-2:#E3D6CE;
   --peach:#F4B896; --lilac:#C3AFE4; --mint:#94D1BB;
   --fear:#B5677E; --sting:#5E9182;
-  --display:"Fraunces",Georgia,serif; --ui:"Karla",system-ui,sans-serif; --data:"DM Mono",monospace;
-  --r:14px;
+  --display:"Jua",system-ui,sans-serif; --ui:"Gowun Dodum","Apple SD Gothic Neo",system-ui,sans-serif; --data:"Baloo 2",system-ui,sans-serif;
+  --r:20px;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:15px;line-height:1.6}
-h1,h2,h3,h4{font-family:var(--display);font-variation-settings:"SOFT" 100,"WONK" 1;font-weight:600;margin:0}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:15px;line-height:1.75;word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3,h4{font-family:var(--display);font-weight:400;margin:0}
 button{font-family:inherit;cursor:pointer}
 :focus-visible{outline:2px solid var(--ink);outline-offset:2px;border-radius:6px}
 
 .top{max-width:1120px;margin:0 auto;padding:26px 24px 10px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
-.logo{font-family:var(--display);font-variation-settings:"SOFT" 100,"WONK" 1;font-size:21px;font-weight:700}
+.logo{font-family:var(--display);font-size:21px;font-weight:700}
 .logo span{color:var(--muted);font-family:var(--data);font-size:11px;font-weight:400;letter-spacing:.06em;display:block;margin-top:1px}
 nav{display:flex;gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px}
 nav button{border:0;background:transparent;color:var(--ink-soft);font-size:13px;font-weight:500;padding:7px 15px;border-radius:999px}
@@ -51,7 +51,7 @@ nav button.on{background:var(--ink);color:#fff}
 
 .calhead{display:flex;align-items:center;gap:12px;margin-bottom:18px}
 .calhead h2{font-size:24px;flex:1}
-.arw{border:1px solid var(--line-2);background:var(--surface);color:var(--ink-soft);width:32px;height:32px;border-radius:9px;font-size:15px;line-height:1}
+.arw{border:1px solid var(--line-2);background:var(--surface);color:var(--ink-soft);width:32px;height:32px;border-radius:12px;font-size:15px;line-height:1}
 .arw:hover{background:var(--bg)}
 
 .goal{margin-bottom:20px}
@@ -67,7 +67,7 @@ nav button.on{background:var(--ink);color:#fff}
 .dow{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:6px}
 .dow span{font-family:var(--data);font-size:10.5px;color:var(--muted);text-align:center;letter-spacing:.08em}
 .grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
-.cell{aspect-ratio:1/1;border:1px solid var(--line);background:var(--surface);border-radius:11px;padding:7px 6px 6px;display:flex;flex-direction:column;align-items:flex-start;gap:4px;transition:border-color .15s,transform .1s}
+.cell{aspect-ratio:1/1;border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:7px 6px 6px;display:flex;flex-direction:column;align-items:flex-start;gap:4px;transition:border-color .15s,transform .1s}
 .cell:hover{border-color:var(--line-2);transform:translateY(-1px)}
 .cell.pad{background:transparent;border-color:transparent;pointer-events:none}
 .cell.empty{border-style:dashed;border-color:var(--line-2)}
@@ -83,8 +83,8 @@ nav button.on{background:var(--ink);color:#fff}
 .legend{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 10px;margin-top:16px;font-family:var(--data);font-size:10px;color:var(--muted);white-space:nowrap}
 .legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:middle}
 
-.side h3{font-family:var(--data);font-variation-settings:normal;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
-.rec{border:1px solid var(--line);border-radius:11px;padding:12px 13px;margin-bottom:9px;background:var(--bg)}
+.side h3{font-family:var(--data);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.rec{border:1px solid var(--line);border-radius:14px;padding:12px 13px;margin-bottom:9px;background:var(--bg)}
 .rec-t{display:flex;gap:8px;align-items:flex-start}
 .rec-t b{font-weight:600;font-size:14px;line-height:1.35;flex:1}
 .chip{font-family:var(--data);font-size:9.5px;letter-spacing:.06em;padding:2px 7px;border-radius:99px;color:#463C41;white-space:nowrap;display:inline-block}
@@ -92,12 +92,12 @@ nav button.on{background:var(--ink);color:#fff}
 .rec-note{font-size:13px;color:var(--ink-soft);margin-top:8px;padding-top:8px;border-top:1px dashed var(--line-2)}
 .empty-note{color:var(--muted);font-size:13.5px;padding:12px 0 16px;line-height:1.6}
 
-.btn{border:1px solid var(--ink);background:var(--ink);color:#fff;border-radius:10px;padding:10px 15px;font-size:13.5px;font-weight:500;width:100%}
+.btn{border:1px solid var(--ink);background:var(--ink);color:#fff;border-radius:14px;padding:11px 15px;font-size:13.5px;font-weight:500;width:100%}
 .btn.alt{background:var(--surface);color:var(--ink);border-color:var(--line-2)}
 .btn.alt:hover{background:var(--bg)}
 .btn.sm{width:auto;padding:7px 12px;font-size:12.5px}
 
-.pend{border:1px dashed var(--line-2);border-radius:11px;padding:11px 13px;margin-bottom:8px;background:var(--surface)}
+.pend{border:1px dashed var(--line-2);border-radius:14px;padding:11px 13px;margin-bottom:8px;background:var(--surface)}
 .pend b{font-size:13.5px;font-weight:600;display:block}
 .pend .w{font-family:var(--data);font-size:10.5px;color:var(--muted);margin:4px 0 9px}
 
@@ -108,7 +108,7 @@ nav button.on{background:var(--ink);color:#fff}
   width:min(460px,100%);max-height:86vh;overflow:auto;padding:24px 24px 22px;
   box-shadow:0 24px 60px -18px rgba(74,64,72,.28);animation:pop .18s ease-out}
 @keyframes pop{from{opacity:0;transform:translateY(10px) scale(.985)}}
-.sheet h3{font-family:var(--display);font-variation-settings:"SOFT" 100,"WONK" 1;
+.sheet h3{font-family:var(--display);
   text-transform:none;letter-spacing:normal;font-size:20px;color:var(--ink);margin:0 0 2px}
 .sheet .when{font-family:var(--data);font-size:11px;color:var(--muted);margin-bottom:18px;letter-spacing:.05em}
 .x{position:absolute;top:14px;right:14px;border:0;background:transparent;color:var(--muted);font-size:20px;line-height:1;padding:4px 8px;border-radius:8px}
@@ -116,10 +116,10 @@ nav button.on{background:var(--ink);color:#fff}
 
 label{display:block;font-family:var(--data);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 5px}
 label .opt{text-transform:none;letter-spacing:0;font-family:var(--ui)}
-input[type=text],textarea{width:100%;background:var(--bg);border:1px solid var(--line-2);border-radius:9px;padding:10px 11px;font-family:var(--ui);font-size:15px;color:var(--ink);margin-bottom:15px}
+input[type=text],textarea{width:100%;background:var(--bg);border:1px solid var(--line-2);border-radius:12px;padding:10px 11px;font-family:var(--ui);font-size:15px;color:var(--ink);margin-bottom:15px}
 textarea{min-height:60px;resize:vertical}
 .seg{display:flex;gap:5px;margin-bottom:15px;flex-wrap:wrap}
-.seg button{flex:1;min-width:34px;border:1px solid var(--line-2);background:var(--bg);color:var(--ink-soft);border-radius:9px;padding:9px 4px;font-size:13px;font-family:var(--data)}
+.seg button{flex:1;min-width:34px;border:1px solid var(--line-2);background:var(--bg);color:var(--ink-soft);border-radius:12px;padding:9px 4px;font-size:13px;font-family:var(--data)}
 .seg button:hover{border-color:var(--muted)}
 .seg button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
 .seg.wide button{flex:1 1 30%;font-family:var(--ui);font-size:12.5px}
@@ -127,7 +127,7 @@ textarea{min-height:60px;resize:vertical}
 .hint{font-family:var(--data);font-size:10.5px;color:var(--muted);margin:-9px 0 15px;line-height:1.55}
 .more{border:0;background:transparent;color:var(--ink-soft);font-size:12.5px;padding:0 0 14px;text-decoration:underline;text-underline-offset:3px}
 
-.deck{background:linear-gradient(135deg,#FFF4E9,#F3EDFA);border:1px solid var(--line-2);border-radius:11px;padding:14px;margin-bottom:12px}
+.deck{background:linear-gradient(135deg,#FFF4E9,#F3EDFA);border:1px solid var(--line-2);border-radius:14px;padding:14px;margin-bottom:12px}
 .deck p{margin:0 0 10px;font-size:14px}
 .deck .lv{font-family:var(--data);font-size:10px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:5px}
 
@@ -152,12 +152,12 @@ textarea{min-height:60px;resize:vertical}
 .stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px}
 .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .tile{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 14px;min-width:0;text-align:center}
-.tile .v{font-family:var(--display);font-variation-settings:"SOFT" 100,"WONK" 1;font-size:clamp(28px,7vw,38px);font-weight:700;line-height:1}
+.tile .v{font-family:var(--display);font-size:clamp(28px,7vw,38px);font-weight:700;line-height:1}
 .tile .k{font-size:12px;color:var(--ink-soft);font-weight:500;margin-top:6px;line-height:1.3}
 .hero-stat{background:linear-gradient(120deg,#FFF6EE 0%,#F6F1FB 55%,#EFF7F3 100%)}
 .srow{margin-bottom:18px}
 .srow .lab{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:13.5px;color:var(--ink-soft);margin-bottom:6px}
-.srow .lab b{font-family:var(--display);font-variation-settings:"SOFT" 100,"WONK" 1;font-size:24px;line-height:1}
+.srow .lab b{font-family:var(--display);font-size:24px;line-height:1}
 .srow .track{height:16px;background:rgba(255,255,255,.75);border:1px solid var(--line-2);border-radius:99px;overflow:hidden}
 .srow .track i{display:block;height:100%;border-radius:99px;transition:width .6s ease}
 .axis{display:flex;justify-content:space-between;font-family:var(--data);font-size:10px;color:var(--muted);margin-top:3px}
@@ -203,12 +203,12 @@ footer button:hover{background:var(--bg);color:var(--ink)}
 <body>
 
 <header class="top">
-  <div class="logo">Fail Freely<span>an archive of things you tried anyway</span></div>
+  <div class="logo">Fail Freely<span>그래도 해본 것들의 기록</span></div>
   <nav>
-    <button data-v="cal" class="on">Calendar</button>
-    <button data-v="arc">Archive</button>
-    <button data-v="ins">Insights</button>
-    <button data-v="abt">About</button>
+    <button data-v="cal" class="on">캘린더</button>
+    <button data-v="arc">기록</button>
+    <button data-v="ins">돌아보기</button>
+    <button data-v="abt">소개</button>
   </nav>
 </header>
 
@@ -218,17 +218,17 @@ footer button:hover{background:var(--bg);color:var(--ink)}
       <div class="card">
         <div class="goal">
           <div class="goal-row">
-            <button class="goal-edit" id="goalBtn">THIS WEEK — COURAGE POINTS<span class="pen">edit</span></button>
+            <button class="goal-edit" id="goalBtn">이번 주 용기 점수<span class="pen">수정</span></button>
             <span><b id="gNow">0</b> / <span id="gGoal">10</span></span>
           </div>
           <div class="bar"><i id="gBar" style="width:0%"></i></div>
         </div>
         <div class="calhead">
           <h2 id="mLabel">—</h2>
-          <button class="arw" id="prev" aria-label="Previous month">‹</button>
-          <button class="arw" id="next" aria-label="Next month">›</button>
+          <button class="arw" id="prev" aria-label="이전 달">‹</button>
+          <button class="arw" id="next" aria-label="다음 달">›</button>
         </div>
-        <div class="dow"><span>SUN</span><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span></div>
+        <div class="dow"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div>
         <div class="grid" id="grid"></div>
         <div class="legend" id="legend"></div>
       </div>
@@ -238,12 +238,12 @@ footer button:hover{background:var(--bg);color:var(--ink)}
           <h3 id="dLabel">—</h3>
           <div id="dayList"></div>
           <div id="deckSlot"></div>
-          <button class="btn" id="addBtn">+ Log a try</button>
-          <button class="btn alt" id="deckBtn" style="margin-top:8px">Draw a challenge</button>
+          <button class="btn" id="addBtn">+ 기록하기</button>
+          <button class="btn alt" id="deckBtn" style="margin-top:8px">오늘의 도전 뽑기</button>
         </div>
         <div class="card" style="margin-top:16px">
-          <h3>Still out there — <span id="pendN">0</span></h3>
-          <p class="empty-note" style="margin:-6px 0 10px;padding:0;font-size:12.5px">Tries whose result hasn't come back yet.</p>
+          <h3>결과 기다리는 중 — <span id="pendN">0</span></h3>
+          <p class="empty-note" style="margin:-6px 0 10px;padding:0;font-size:12.5px">아직 결과가 안 온 시도들이에요.</p>
           <div id="pendList"></div>
         </div>
       </div>
@@ -261,44 +261,44 @@ footer button:hover{background:var(--bg);color:var(--ink)}
 
   <section class="view" id="v-abt">
     <!-- ============================================================
-         EDIT THIS SECTION. Replace with your own story.
+         이 부분을 본인 이야기로 바꾸세요.
          ============================================================ -->
     <div class="about">
-      <h2>Why this exists</h2>
-      <p class="lead">I failed a round of interviews. A few days later I met friends I hadn't seen in a while.</p>
-      <p>They looked happy. One of them was telling me something and I couldn't hold on to a single sentence of it. I kept nodding in the wrong places.</p>
-      <p>What hurt wasn't that they were doing well. It was that they had been through the same kind of rejections I had, and they were still applying to things anyway. They had kept moving. I had stopped. Sitting at that table, I could feel exactly how still I was.</p>
-      <p>So I built this instead of staying still.</p>
-      <p>I don't think failing is good. I think it's the receipt for having tried, and I wanted somewhere the receipts pile up where I can see them. Every entry here is a day I did something instead of nothing.</p>
+      <h2>왜 만들었나</h2>
+      <p class="lead">면접에서 떨어졌어요. 며칠 뒤에 오랜만에 친구들을 만났고요.</p>
+      <p>다들 즐거워 보였어요. 친구가 무슨 얘기를 하는데 한 문장도 귀에 안 들어오더라고요. 엉뚱한 데서 고개만 끄덕였어요.</p>
+      <p>아팠던 건 친구들이 잘나가서가 아니었어요. 그 애들도 저처럼 떨어져 봤는데, 그래도 계속 지원하고 있었다는 거요. 걔들은 계속 움직이고 있었고 저는 멈춰 있었어요. 그 자리에서 제가 얼마나 멈춰 있는지가 느껴졌어요.</p>
+      <p>그래서 멈춰 있는 대신 이걸 만들었어요.</p>
+      <p>실패가 좋은 거라고 생각하진 않아요. 다만 실패는 <b>해봤다는 영수증</b>이고, 그 영수증이 눈에 보이는 데 쌓였으면 했어요. 여기 있는 기록 하나하나가 아무것도 안 하는 대신 뭔가를 한 날이에요.</p>
 
-      <h3>How it works</h3>
+      <h3>쓰는 법</h3>
       <ul>
-        <li><b>Log anything you went for.</b> A job application counts. So does asking a stranger for directions.</li>
-        <li><b>Score two things.</b> Courage — how scary it was going in. Impact — how much it stung afterward.</li>
-        <li><b>If the result comes later,</b> the entry stays open. The day you finally open that email gets logged as its own act of courage, because not opening it is its own kind of stuck.</li>
-        <li><b>Once a week</b> you see the gap between what you feared and what it actually cost.</li>
+        <li><b>해본 건 뭐든 기록해요.</b> 지원서도 들어가고, 모르는 사람에게 길 물어본 것도 들어가요.</li>
+        <li><b>두 가지를 매겨요.</b> 용기 — 하기 전에 얼마나 무서웠는지. 타격 — 하고 나서 얼마나 힘들었는지.</li>
+        <li><b>결과가 나중에 오면</b> 열어둬요. 못 열어본 발표 메일을 여는 날, 그것도 하나의 도전으로 기록돼요.</li>
+        <li><b>일주일에 한 번</b> 겁먹은 정도와 실제로 받은 타격의 차이를 봐요.</li>
       </ul>
 
-      <h3>What it deliberately doesn't do</h3>
+      <h3>일부러 안 넣은 것</h3>
       <ul>
-        <li>No success rate. Nowhere in it.</li>
-        <li>No streaks, no flames, no "you broke your chain".</li>
-        <li>No leaderboard and nobody else's numbers beside yours.</li>
-        <li>An empty day isn't a miss. It's a slot that's still open.</li>
+        <li>성공률. 어디에도 없어요.</li>
+        <li>연속 기록도, 불꽃 표시도, "기록이 끊겼어요"도 없어요.</li>
+        <li>랭킹도, 다른 사람 숫자도 없어요.</li>
+        <li>안 한 날은 실패한 날이 아니라 그냥 아직 빈 칸이에요.</li>
       </ul>
 
-      <h3>Your data</h3>
-      <p>Everything stays in your browser. There's no account and no server — nothing you write here is sent anywhere. That also means clearing your browser data will erase it, so use <b>Export</b> at the bottom of the page if you want a backup.</p>
+      <h3>기록은 어디에</h3>
+      <p>전부 이 브라우저 안에만 있어요. 계정도 서버도 없어서 여기 쓴 건 아무 데도 전송되지 않아요. 다만 브라우저 기록을 지우면 같이 사라지니까, 백업이 필요하면 화면 맨 아래 <b>내보내기</b>를 쓰세요.</p>
     </div>
   </section>
 </main>
 
 <footer>
-  <span class="fnote" id="fnote">Saved in this browser only. Nothing is sent anywhere.</span>
-  <button id="expBtn">Export</button>
-  <button id="impBtn">Import</button>
-  <button id="demoBtn">Load sample entries</button>
-  <button id="clrBtn">Clear all</button>
+  <span class="fnote" id="fnote">이 브라우저에만 저장돼요. 아무 데도 전송되지 않아요.</span>
+  <button id="expBtn">내보내기</button>
+  <button id="impBtn">가져오기</button>
+  <button id="demoBtn">예시 채우기</button>
+  <button id="clrBtn">전체 삭제</button>
   <input type="file" id="impFile" accept="application/json" hidden>
 </footer>
 
@@ -308,25 +308,25 @@ footer button:hover{background:var(--bg);color:var(--ink)}
 </div>
 
 <script>
-const CATS = {Work:"--peach",People:"--lilac",Self:"--mint"};
-const CAT_HINT = {Work:"an institution can say no",People:"a person can say no",Self:"nobody says no — just the discomfort"};
-const TIERS = {S:"Small try",M:"Application",L:"Long shot"};
-const STAGES = ["Applied","Documents passed","Interviewed","Final round"];
+const CATS = {"일":"--peach","사람":"--lilac","나":"--mint"};
+const CAT_HINT = {"일":"기관이 거절할 수 있어요","사람":"한 사람이 거절할 수 있어요","나":"거절할 사람이 없어요. 불편함만 있어요"};
+const TIERS = {S:"작은 시도",M:"지원",L:"큰 도전"};
+const STAGES = ["지원함","서류 통과","면접 봄","최종 면접"];
 const DECK = [
-  {lv:1,t:"Order something you've never tried"},
-  {lv:1,t:"Ask a stranger what time it is"},
-  {lv:2,t:"Say hello first to someone you usually don't"},
-  {lv:2,t:"Ask a question in a class or a meeting"},
-  {lv:2,t:"Go somewhere new alone for an hour"},
-  {lv:3,t:"Ask for a discount, politely, once"},
-  {lv:3,t:"Show unfinished work to one person"},
-  {lv:3,t:"Ask someone for feedback you might not like"},
-  {lv:4,t:"Email someone whose work you admire"},
-  {lv:4,t:"Apply to something you feel underqualified for"},
-  {lv:4,t:"Ask for what you actually want, out loud"},
-  {lv:5,t:"Open the result you've been avoiding"},
-  {lv:5,t:"Reapply somewhere that already said no"},
-  {lv:5,t:"Tell someone the thing you've been not saying"}
+  {lv:1,t:"한 번도 안 시켜본 메뉴 시키기"},
+  {lv:1,t:"모르는 사람에게 시간 물어보기"},
+  {lv:2,t:"평소 안 하던 사람에게 먼저 인사하기"},
+  {lv:2,t:"수업이나 회의에서 질문하기"},
+  {lv:2,t:"안 가본 곳에 혼자 한 시간 있어보기"},
+  {lv:3,t:"할인 되냐고 한 번 물어보기"},
+  {lv:3,t:"완성 안 된 걸 한 사람에게 보여주기"},
+  {lv:3,t:"듣기 싫을 수도 있는 피드백 요청하기"},
+  {lv:4,t:"존경하는 사람에게 메일 보내기"},
+  {lv:4,t:"자격이 모자란 것 같은 곳에 지원하기"},
+  {lv:4,t:"원하는 걸 소리 내서 말하기"},
+  {lv:5,t:"미뤄둔 결과 열어보기"},
+  {lv:5,t:"이미 떨어진 곳에 다시 지원하기"},
+  {lv:5,t:"못 하고 있던 말 꺼내기"}
 ];
 
 let DATA = [];
@@ -341,11 +341,11 @@ const TODAY = iso(new Date());
 const shift = n=>{ const d=parse(TODAY); d.setDate(d.getDate()+n); return iso(d); };
 let cursor = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
 let selected = TODAY;
-let filter = "All";
+let filter = "전체";
 
 const col = c=>`var(${CATS[c]||"--line-2"})`;
 const esc = s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const fmt = s=>parse(s).toLocaleDateString("en-US",{month:"short",day:"numeric"});
+const fmt = s=>parse(s).toLocaleDateString("ko-KR",{month:"long",day:"numeric"});
 const isOpen = r=>r.impact===null||r.impact===undefined;
 const plural = (n,w)=>`${n} ${w}${n===1?"":"s"}`;
 
@@ -382,7 +382,7 @@ async function load(){
     if(p.weekGoal) weekGoal=p.weekGoal;
   }catch(e){} }
   if(mode==="memory"){
-    document.getElementById("fnote").textContent="This browser is blocking storage, so entries will vanish on refresh. Use Export to keep them.";
+    document.getElementById("fnote").textContent="이 브라우저가 저장을 막고 있어서 새로고침하면 사라져요. 내보내기로 백업하세요.";
   }
 }
 
@@ -391,7 +391,7 @@ const modal=document.getElementById("modal"), sheet=document.getElementById("she
 let lastFocus=null;
 function openModal(html){
   lastFocus=document.activeElement;
-  sheet.innerHTML=`<button class="x" id="mX" aria-label="Close">×</button>`+html;
+  sheet.innerHTML=`<button class="x" id="mX" aria-label="닫기">×</button>`+html;
   modal.hidden=false; document.body.style.overflow="hidden";
   document.getElementById("mX").onclick=closeModal;
   const f=sheet.querySelector("input,textarea,button:not(.x)"); if(f) f.focus();
@@ -407,21 +407,21 @@ function ask(title,body,yesLabel,onYes){
   openModal(`<h3>${title}</h3>
     <p class="idesc" style="margin:10px 0 20px">${body}</p>
     <button class="btn" id="okBtn">${yesLabel}</button>
-    <button class="btn alt sm" id="noBtn" style="width:100%;margin-top:8px">Cancel</button>`);
+    <button class="btn alt sm" id="noBtn" style="width:100%;margin-top:8px">취소</button>`);
   document.getElementById("okBtn").onclick=()=>{ closeModal(); onYes(); };
   document.getElementById("noBtn").onclick=closeModal;
 }
 function notice(title,body){
   openModal(`<h3>${title}</h3>
     <p class="idesc" style="margin:10px 0 20px">${body}</p>
-    <button class="btn" id="okBtn">OK</button>`);
+    <button class="btn" id="okBtn">확인</button>`);
   document.getElementById("okBtn").onclick=closeModal;
 }
 
 /* ---------- calendar ---------- */
 function renderCal(){
   const y=cursor.getFullYear(), m=cursor.getMonth();
-  document.getElementById("mLabel").textContent=cursor.toLocaleDateString("en-US",{month:"long",year:"numeric"});
+  document.getElementById("mLabel").textContent=cursor.toLocaleDateString("ko-KR",{year:"numeric",month:"long"});
   const first=new Date(y,m,1).getDay(), len=new Date(y,m+1,0).getDate();
   const g=document.getElementById("grid"); g.innerHTML="";
   for(let i=0;i<first;i++){ const p=document.createElement("div"); p.className="cell pad"; g.appendChild(p); }
@@ -431,7 +431,7 @@ function renderCal(){
     const b=document.createElement("button");
     b.className="cell"+(marks.length?" hit":" empty")+(ds===TODAY?" today":"")+(ds===selected?" sel":"");
     b.dataset.date=ds;
-    b.setAttribute("aria-label",`${fmt(ds)} — ${plural(marks.length,"mark")}`);
+    b.setAttribute("aria-label",`${fmt(ds)} — 기록 ${marks.length}개`);
     b.innerHTML=`<span class="d">${d}</span><span class="dots">${marks.slice(0,6).map(k=>
       k.kind==="try"
         ? `<i class="dot ${k.r.tier.toLowerCase()}" style="background:${col(k.r.cat)}"></i>`
@@ -445,42 +445,42 @@ function renderCal(){
   document.getElementById("gBar").style.width=Math.min(100,(p/weekGoal)*100)+"%";
   document.getElementById("legend").innerHTML=
     Object.keys(CATS).map(c=>`<span><i style="background:${col(c)}"></i>${c}</span>`).join("")
-    +`<span><i style="background:var(--muted)"></i>tried</span>`
-    +`<span><i style="border:2px solid var(--muted);background:transparent"></i>result</span>`;
+    +`<span><i style="background:var(--muted)"></i>시도</span>`
+    +`<span><i style="border:2px solid var(--muted);background:transparent"></i>결과</span>`;
 }
 
 /* ---------- side panel ---------- */
 function renderSide(){
-  document.getElementById("dLabel").textContent=fmt(selected).toUpperCase()+(selected===TODAY?" · TODAY":"");
+  document.getElementById("dLabel").textContent=fmt(selected)+(selected===TODAY?" · 오늘":"");
   const marks=marksOn(selected);
   document.getElementById("dayList").innerHTML = marks.length ? marks.map(k=>{
     const r=k.r, isR=k.kind==="reck";
     return `<div class="rec">
-      <div class="rec-t"><b>${isR?"Opened the result — ":""}${esc(r.title)}</b>
+      <div class="rec-t"><b>${isR?"결과 확인 — ":""}${esc(r.title)}</b>
         <span class="chip" style="background:${col(r.cat)}">${r.cat}</span></div>
       <div class="rec-meta">
-        <span>courage ${isR?r.reck.courage:r.courage}/5</span>
-        ${isR?`<span>impact ${r.impact}/5</span>`:(isOpen(r)?`<span>still out there</span>`:`<span>impact ${r.impact}/5</span>`)}
+        <span>용기 ${isR?r.reck.courage:r.courage}/5</span>
+        ${isR?`<span>타격 ${r.impact}/5</span>`:(isOpen(r)?`<span>결과 대기 중</span>`:`<span>타격 ${r.impact}/5</span>`)}
         <span>${TIERS[r.tier]}</span></div>
       ${(isR||!isOpen(r))&&r.learned?`<div class="rec-note">${esc(r.learned)}</div>`:""}
     </div>`;
   }).join("") : (DATA.length
-      ? `<p class="empty-note">Nothing here yet. An empty day isn't a miss — it's a slot that's still open.</p>`
-      : `<p class="empty-note">Nothing logged yet. Pick a day and write down one thing you went for. It can be as small as asking a stranger for directions.</p>`);
+      ? `<p class="empty-note">아직 없어요. 안 한 날은 실패한 날이 아니라 그냥 아직 빈 칸이에요.</p>`
+      : `<p class="empty-note">아직 기록이 없어요. 날짜를 눌러서 해본 것 하나를 적어보세요. 길 물어본 것처럼 작아도 괜찮아요.</p>`);
 
   const pend=DATA.filter(isOpen);
   document.getElementById("pendN").textContent=pend.length;
   document.getElementById("pendList").innerHTML = pend.length ? pend.map(r=>`
     <div class="pend"><b>${esc(r.title)}</b>
-      <div class="w">tried ${fmt(r.date)}</div>
-      <button class="btn alt sm" data-reck="${r.id}">I opened the result</button></div>`).join("")
-    : `<p class="empty-note">Nothing waiting.</p>`;
+      <div class="w">${fmt(r.date)}에 시도</div>
+      <button class="btn alt sm" data-reck="${r.id}">결과 확인했어요</button></div>`).join("")
+    : `<p class="empty-note">기다리는 게 없어요.</p>`;
   document.querySelectorAll("[data-reck]").forEach(b=>b.onclick=()=>openReck(+b.dataset.reck));
 }
 
 /* ---------- add form ---------- */
 let draft=null;
-const blank=()=>({title:"",tier:"S",cat:"Self",courage:3,impact:1,unknown:false,stage:0,learned:"",showMore:false,impactSet:false});
+const blank=()=>({title:"",tier:"S",cat:"나",courage:3,impact:1,unknown:false,stage:0,learned:"",showMore:false,impactSet:false});
 function seg(name,items,cur,cls=""){
   return `<div class="seg ${cls}">`+items.map(([v,l])=>
     `<button type="button" data-seg="${name}" data-val="${v}" class="${String(cur)===String(v)?"on":""}">${l}</button>`).join("")+`</div>`;
@@ -489,29 +489,29 @@ function stash(){ const t=document.getElementById("fT"), l=document.getElementBy
   if(t) draft.title=t.value; if(l) draft.learned=l.value; }
 function paintAdd(){
   openModal(`
-    <h3>Log a try</h3>
-    <div class="when">${fmt(selected).toUpperCase()}${selected===TODAY?" · TODAY":""}</div>
-    <label for="fT">What you tried</label>
-    <input type="text" id="fT" value="${esc(draft.title)}" placeholder="Say it plainly">
-    <label>How big was it</label>
+    <h3>기록하기</h3>
+    <div class="when">${fmt(selected)}${selected===TODAY?" · 오늘":""}</div>
+    <label for="fT">뭘 해봤나요</label>
+    <input type="text" id="fT" value="${esc(draft.title)}" placeholder="있는 그대로 적어주세요">
+    <label>얼마나 큰 도전이었나요</label>
     ${seg("tier",Object.entries(TIERS),draft.tier,"wide")}
-    <label>Category — who could say no?</label>
+    <label>누가 거절할 수 있나요</label>
     ${seg("cat",Object.keys(CATS).map(c=>[c,c]),draft.cat,"wide")}
     <p class="hint">${CAT_HINT[draft.cat]}</p>
-    <label>Courage — how scary was this?</label>
+    <label>용기 — 하기 전에 얼마나 무서웠나요</label>
     ${seg("courage",[1,2,3,4,5].map(n=>[n,n]),draft.courage)}
-    <label>Impact — how much did it sting?</label>
+    <label>타격 — 실제로 얼마나 힘들었나요</label>
     ${seg("impact",[1,2,3,4,5].map(n=>[n,n]),draft.unknown?"":draft.impact)}
-    <div class="seg"><button type="button" data-seg="impact" data-val="unknown" class="full ${draft.unknown?"on":""}">I don't know yet — the result comes later</button></div>
+    <div class="seg"><button type="button" data-seg="impact" data-val="unknown" class="full ${draft.unknown?"on":""}">아직 몰라요 — 결과가 나중에 나와요</button></div>
     <p class="hint">${draft.unknown
-      ? "This one stays open. You'll score the sting on the day you open the result — and opening it counts as its own try."
-      : "You already know how this landed, so it closes today."}</p>
+      ? "열어둘게요. 결과를 확인하는 날 타격을 적으면 돼요. 그 확인도 하나의 도전으로 기록돼요."
+      : "결과를 이미 알고 있으니 오늘 마무리돼요."}</p>
     ${draft.showMore ? `
-      ${draft.tier!=="S"?`<label>How far you got</label>${seg("stage",STAGES.map((s,i)=>[i,s]),draft.stage,"wide")}`:""}
-      <label for="fL">What you learned <span class="opt">(optional)</span></label>
-      <textarea id="fL" placeholder="Not what went wrong. What you now know.">${esc(draft.learned)}</textarea>`
-      : `<button type="button" class="more" data-seg="showMore" data-val="1">+ Add details${draft.tier!=="S"?" — how far you got, what you learned":" — what you learned"}</button>`}
-    <button class="btn" id="fSave">Add to the calendar</button>`);
+      ${draft.tier!=="S"?`<label>어디까지 갔나요</label>${seg("stage",STAGES.map((s,i)=>[i,s]),draft.stage,"wide")}`:""}
+      <label for="fL">알게 된 것 <span class="opt">(선택)</span></label>
+      <textarea id="fL" placeholder="뭘 잘못했나 말고, 뭘 알게 됐나를 적어요">${esc(draft.learned)}</textarea>`
+      : `<button type="button" class="more" data-seg="showMore" data-val="1">+ 자세히 쓰기${draft.tier!=="S"?" — 어디까지 갔는지, 알게 된 것":" — 알게 된 것"}</button>`}
+    <button class="btn" id="fSave">캘린더에 추가</button>`);
   sheet.querySelectorAll("[data-seg]").forEach(b=>b.onclick=()=>{
     stash();
     const k=b.dataset.seg, v=b.dataset.val;
@@ -540,15 +540,15 @@ document.getElementById("goalBtn").onclick=()=>{
   let g=weekGoal;
   const paint=()=>{
     openModal(`
-      <h3>Your weekly goal</h3>
-      <div class="when">COURAGE POINTS PER WEEK</div>
-      <p class="idesc" style="margin-bottom:16px">The goal counts courage, not tries — one 5-point thing weighs the same as five 1-point things. Set it low enough that a bad week still clears it.</p>
-      <label>Points per week</label>
+      <h3>이번 주 목표</h3>
+      <div class="when">주당 용기 점수</div>
+      <p class="idesc" style="margin-bottom:16px">목표는 횟수가 아니라 용기 점수예요. 5점짜리 하나가 1점짜리 다섯 개와 같아요. 안 좋은 주에도 넘길 수 있는 선으로 잡으세요.</p>
+      <label>주당 점수</label>
       ${seg("g",[5,10,15,20,25].map(n=>[n,n]),g)}
-      <label for="gCustom">Or set your own</label>
+      <label for="gCustom">직접 입력</label>
       <input type="text" id="gCustom" inputmode="numeric" value="${g}">
-      <button class="btn" id="gSave">Save goal</button>
-      <p class="hint" style="margin:12px 0 0">Missing the goal does nothing. No streak, no warning, no colour change — the bar just stops where it stopped.</p>`);
+      <button class="btn" id="gSave">저장</button>
+      <p class="hint" style="margin:12px 0 0">못 채워도 아무 일도 없어요. 연속 기록도, 경고도, 색 변화도 없어요. 막대가 멈춘 자리에 그냥 멈춰요.</p>`);
     sheet.querySelectorAll("[data-seg]").forEach(b=>b.onclick=()=>{ g=+b.dataset.val; paint(); });
     document.getElementById("gSave").onclick=()=>{
       const v=parseInt(document.getElementById("gCustom").value,10);
@@ -563,9 +563,9 @@ document.getElementById("goalBtn").onclick=()=>{
 function drawCard(){
   const c=DECK[Math.floor(Math.random()*DECK.length)];
   document.getElementById("deckSlot").innerHTML=`
-    <div class="deck"><div class="lv">Courage ${c.lv} of 5</div><p>${esc(c.t)}</p>
-      <button class="btn alt sm" id="dTake">Log this one</button>
-      <button class="btn alt sm" id="dAgain">Draw another</button></div>`;
+    <div class="deck"><div class="lv">용기 ${c.lv} / 5</div><p>${esc(c.t)}</p>
+      <button class="btn alt sm" id="dTake">이걸로 기록하기</button>
+      <button class="btn alt sm" id="dAgain">다시 뽑기</button></div>`;
   document.getElementById("dTake").onclick=()=>{
     draft=blank(); draft.title=c.t; draft.courage=c.lv;
     document.getElementById("deckSlot").innerHTML=""; paintAdd();
@@ -580,20 +580,20 @@ function openReck(id){
   let rc=3, im=3, noReply=false, note=r.learned||"";
   const paint=()=>{
     openModal(`
-      <h3>You opened it</h3>
-      <div class="when">${esc(r.title).toUpperCase()}</div>
+      <h3>결과를 확인했어요</h3>
+      <div class="when">${esc(r.title)}</div>
       <div class="rec" style="background:var(--bg);margin-bottom:18px">
-        <div class="rec-meta" style="margin:0"><span>tried ${fmt(r.date)}</span><span>${TIERS[r.tier]}</span></div>
+        <div class="rec-meta" style="margin:0"><span>${fmt(r.date)}에 시도</span><span>${TIERS[r.tier]}</span></div>
       </div>
-      <label>Courage — how hard was it to look?</label>
+      <label>용기 — 확인하기까지 얼마나 힘들었나요</label>
       ${seg("rc",[1,2,3,4,5].map(n=>[n,n]),rc)}
-      <p class="hint">Not opening a result is its own kind of stuck. Getting past it counts as a try.</p>
-      <label>Impact — how much did it sting?</label>
+      <p class="hint">결과를 못 여는 것도 멈춰 있는 거예요. 그걸 넘긴 것도 도전이에요.</p>
+      <label>타격 — 실제로 얼마나 힘들었나요</label>
       ${seg("im",[1,2,3,4,5].map(n=>[n,n]),im)}
-      <div class="seg"><button type="button" data-seg="nr" data-val="1" class="full ${noReply?"on":""}">They never replied — close it anyway</button></div>
-      <label for="rL">What you learned <span class="opt">(optional)</span></label>
-      <textarea id="rL" placeholder="What you now know.">${esc(note)}</textarea>
-      <button class="btn" id="rSave">Close this one</button>`);
+      <div class="seg"><button type="button" data-seg="nr" data-val="1" class="full ${noReply?"on":""}">답이 안 왔어요 — 그냥 마무리하기</button></div>
+      <label for="rL">알게 된 것 <span class="opt">(선택)</span></label>
+      <textarea id="rL" placeholder="뭘 알게 됐는지 적어요">${esc(note)}</textarea>
+      <button class="btn" id="rSave">마무리하기</button>`);
     sheet.querySelectorAll("[data-seg]").forEach(b=>b.onclick=()=>{
       const l=document.getElementById("rL"); if(l) note=l.value;
       const k=b.dataset.seg;
@@ -616,30 +616,30 @@ function renderArc(){
   if(!DATA.length){
     document.getElementById("filters").innerHTML="";
     document.getElementById("arch").innerHTML=
-      `<div class="blank" style="grid-column:1/-1"><h3>Nothing archived yet</h3>
-        <p>Once you've logged a few tries, they'll collect here — with what you wrote about each one.</p></div>`;
+      `<div class="blank" style="grid-column:1/-1"><h3>아직 기록이 없어요</h3>
+        <p>기록을 몇 개 남기면 여기 모여요. 그때 쓴 문장까지 같이요.</p></div>`;
     return;
   }
-  const cats=["All",...Object.keys(CATS)];
+  const cats=["전체",...Object.keys(CATS)];
   document.getElementById("filters").innerHTML=cats.map(c=>
     `<button class="${filter===c?"on":""}" data-f="${c}">${c}</button>`).join("");
   document.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{ filter=b.dataset.f; renderArc(); });
-  const list=DATA.filter(r=>filter==="All"||r.cat===filter).slice().sort((a,b)=>b.date.localeCompare(a.date));
+  const list=DATA.filter(r=>filter==="전체"||r.cat===filter).slice().sort((a,b)=>b.date.localeCompare(a.date));
   document.getElementById("arch").innerHTML = list.length ? list.map(r=>`
     <article class="acard">
       <button class="ahead" data-open aria-expanded="false">
         <span class="chip" style="background:${col(r.cat)}">${r.cat}</span>
         <h4>${esc(r.title)}</h4>
-        <span class="m"><span>${fmt(r.date)}</span><span>courage ${r.courage}/5</span>
-          <span>${isOpen(r)?"still out there":"impact "+r.impact+"/5"}</span>
+        <span class="m"><span>${fmt(r.date)}</span><span>용기 ${r.courage}/5</span>
+          <span>${isOpen(r)?"결과 대기 중":"타격 "+r.impact+"/5"}</span>
         </span>
       </button>
       <div class="abody"><dl>
-        ${r.tier!=="S"&&r.stage!=null?`<dt>How far I got</dt><dd>${STAGES[r.stage]}${r.noReply?" · no reply":""}</dd>`:""}
-        <dt>What I learned</dt><dd>${esc(r.learned)||"—"}</dd>
-        ${r.reck?`<dt>Opened the result</dt><dd>${fmt(r.reck.date)} · courage ${r.reck.courage}/5</dd>`:""}
+        ${r.tier!=="S"&&r.stage!=null?`<dt>어디까지</dt><dd>${STAGES[r.stage]}${r.noReply?" · 답 없음":""}</dd>`:""}
+        <dt>알게 된 것</dt><dd>${esc(r.learned)||"—"}</dd>
+        ${r.reck?`<dt>결과 확인</dt><dd>${fmt(r.reck.date)} · 용기 ${r.reck.courage}/5</dd>`:""}
       </dl></div>
-    </article>`).join("") : `<p class="empty-note">Nothing in this category yet.</p>`;
+    </article>`).join("") : `<p class="empty-note">여기엔 아직 없어요.</p>`;
   document.querySelectorAll("[data-open]").forEach(b=>b.onclick=()=>{
     const c=b.closest(".acard"); b.setAttribute("aria-expanded",c.classList.toggle("open"));
   });
@@ -649,9 +649,9 @@ function renderArc(){
 function renderIns(){
   if(!DATA.length){
     document.getElementById("ins").innerHTML=
-      `<div class="blank"><h3>No numbers yet</h3>
-        <p>Insights close once a week. Log a few tries and your first report shows up here after Sunday.</p>
-        <button class="btn alt sm" id="insDemo">Load sample entries to see how it looks</button></div>`;
+      `<div class="blank"><h3>아직 숫자가 없어요</h3>
+        <p>돌아보기는 일주일 단위로 정리돼요. 기록을 몇 개 남기면 일요일 이후에 첫 결과가 나와요.</p>
+        <button class="btn alt sm" id="insDemo">예시로 채워서 보기</button></div>`;
     document.getElementById("insDemo").onclick=loadDemo;
     return;
   }
@@ -671,42 +671,42 @@ function renderIns(){
   const hard=closed.filter(r=>r.impact>=4);
   const comebacks=hard.filter(r=>DATA.some(x=>x.id!==r.id&&x.date>closeDate(r))).length;
 
-  const chips=`<button class="${scope==="last"?"on":""}" data-scope="last">Last week</button>`
-    +`<button class="${scope==="all"?"on":""}" data-scope="all">All time</button>`;
+  const chips=`<button class="${scope==="last"?"on":""}" data-scope="last">지난주</button>`
+    +`<button class="${scope==="all"?"on":""}" data-scope="all">전체</button>`;
 
   document.getElementById("ins").innerHTML=`
     <div class="filters" style="margin-bottom:26px">${chips}</div>
     ${scope==="last"&&!tries.length&&!faced.length
-      ? `<p class="idesc" style="margin-bottom:26px">Nothing logged last week.</p>` : ""}
+      ? `<p class="idesc" style="margin-bottom:26px">지난주엔 기록이 없어요.</p>` : ""}
 
     <section class="isec">
-      <h3 class="ititle">The count</h3>
+      <h3 class="ititle">숫자</h3>
       <div class="tiles">
-        <div class="tile"><div class="v">${tries.length}</div><div class="k">Tries</div></div>
+        <div class="tile"><div class="v">${tries.length}</div><div class="k">시도</div></div>
         <div class="tile"><div class="v">${scope==="all"?DATA.filter(isOpen).length:faced.length}</div>
-          <div class="k">${scope==="all"?"Out there":"Faced"}</div></div>
-        <div class="tile"><div class="v">${comebacks}</div><div class="k">Came back</div></div>
+          <div class="k">${scope==="all"?"대기 중":"확인함"}</div></div>
+        <div class="tile"><div class="v">${comebacks}</div><div class="k">다시 시작</div></div>
       </div>
     </section>
 
     <section class="isec">
-      <h3 class="ititle">Fear vs. cost</h3>
+      <h3 class="ititle">두려움과 실제</h3>
       <div class="stat hero-stat">
         <div class="srow">
-          <div class="lab"><span>Fear you felt going in</span><b style="color:var(--fear)">${cAvg.toFixed(1)}</b></div>
+          <div class="lab"><span>하기 전 두려움</span><b style="color:var(--fear)">${cAvg.toFixed(1)}</b></div>
           <div class="track"><i style="width:${(cAvg/5)*100}%;background:var(--fear)"></i></div>
         </div>
         <div class="srow" style="margin-bottom:6px">
-          <div class="lab"><span>Sting it actually left</span><b style="color:var(--sting)">${iAvg.toFixed(1)}</b></div>
+          <div class="lab"><span>실제로 받은 타격</span><b style="color:var(--sting)">${iAvg.toFixed(1)}</b></div>
           <div class="track"><i style="width:${(iAvg/5)*100}%;background:var(--sting)"></i></div>
           <div class="axis"><span>0</span><span>5</span></div>
         </div>
-        <p class="basis">based on ${closed.length} closed ${closed.length===1?"entry":"entries"}</p>
+        <p class="basis">마무리된 기록 ${closed.length}개 기준</p>
       </div>
     </section>
 
     <section class="isec">
-      <h3 class="ititle">Where you spend your nerve</h3>
+      <h3 class="ititle">어디에 용기를 쓰고 있나</h3>
       <div class="stat">${Object.keys(CATS).map(c=>`
         <div class="brow"><span>${c}</span>
           <span class="track"><i style="width:${(counts[c]/max)*100}%;background:${col(c)}"></i></span>
@@ -717,12 +717,12 @@ function renderIns(){
     <section class="isec">
       <div class="cols">
         <div class="stat">
-          <h4>Bravest things you did</h4>
-          <ul class="toplist">${top.map(r=>`<li><span>${esc(r.title)}</span><span class="sc">fear ${r.courage}</span></li>`).join("")||"<li>Nothing closed in this window.</li>"}</ul>
+          <h4>가장 용감했던 것</h4>
+          <ul class="toplist">${top.map(r=>`<li><span>${esc(r.title)}</span><span class="sc">두려움 ${r.courage}</span></li>`).join("")||"<li>아직 마무리된 기록이 없어요.</li>"}</ul>
         </div>
         <div class="stat">
-          <h4>Scared you most, hurt you least</h4>
-          <ul class="toplist">${gapList.map(r=>`<li><span>${esc(r.title)}</span><span class="sc">${r.courage} → ${r.impact}</span></li>`).join("")||"<li>Nothing here yet.</li>"}</ul>
+          <h4>제일 무서웠는데 제일 안 아팠던 것</h4>
+          <ul class="toplist">${gapList.map(r=>`<li><span>${esc(r.title)}</span><span class="sc">${r.courage} → ${r.impact}</span></li>`).join("")||"<li>아직 없어요.</li>"}</ul>
         </div>
       </div>
     </section>`;
@@ -732,26 +732,26 @@ function renderIns(){
 /* ---------- data tools ---------- */
 function loadDemo(){
   DATA=[
-    {id:1,title:"Asked a stranger for directions",date:shift(-13),tier:"S",cat:"People",courage:3,impact:1,reck:null,learned:"They were nice about it. The whole thing took nine seconds."},
-    {id:2,title:"Applied to a supporters program",date:shift(-11),tier:"M",cat:"Work",courage:3,stage:0,impact:3,reck:{date:shift(-6),courage:3},learned:"Cut at the document stage. My application read like everyone else's."},
-    {id:3,title:"Sat in on a class I'd never taken",date:shift(-10),tier:"S",cat:"Self",courage:2,impact:2,reck:null,learned:"Understood maybe half. Half is not zero."},
-    {id:4,title:"Final interview for a volunteer role",date:shift(-6),tier:"L",cat:"Work",courage:5,stage:3,impact:4,reck:{date:shift(-2),courage:5},learned:"I reached the last round, so the application and the first interview worked."},
-    {id:5,title:"Ordered the weird thing on the menu",date:shift(-4),tier:"S",cat:"Self",courage:1,impact:1,reck:null,learned:"Bad. Funny. Fine."},
-    {id:6,title:"Internship application",date:shift(-3),tier:"M",cat:"Work",courage:4,stage:0,impact:null,reck:null,learned:""},
-    {id:7,title:"Cold email to someone I admire",date:shift(-1),tier:"M",cat:"People",courage:5,stage:0,impact:null,reck:null,learned:""},
-    {id:8,title:"Ran again after two weeks off",date:TODAY,tier:"S",cat:"Self",courage:2,impact:1,reck:null,learned:"The first ten minutes were the whole difficulty."}
+    {id:1,title:"모르는 사람에게 길 물어봄",date:shift(-13),tier:"S",cat:"사람",courage:3,impact:1,reck:null,learned:"친절하게 알려줬다. 다 합쳐서 9초 걸렸다."},
+    {id:2,title:"서포터즈 지원",date:shift(-11),tier:"M",cat:"일",courage:3,stage:0,impact:3,reck:{date:shift(-6),courage:3},learned:"서류에서 탈락. 지원서가 남들 것과 똑같이 읽혔다."},
+    {id:3,title:"안 들어본 수업 청강",date:shift(-10),tier:"S",cat:"나",courage:2,impact:2,reck:null,learned:"절반쯤 이해했다. 절반은 0이 아니다."},
+    {id:4,title:"자원봉사 최종 면접",date:shift(-6),tier:"L",cat:"일",courage:5,stage:3,impact:4,reck:{date:shift(-2),courage:5},learned:"최종까지 갔다는 건 서류와 1차는 통했다는 뜻."},
+    {id:5,title:"메뉴판에서 제일 이상한 거 시킴",date:shift(-4),tier:"S",cat:"나",courage:1,impact:1,reck:null,learned:"맛없었다. 웃겼다. 괜찮다."},
+    {id:6,title:"인턴 지원",date:shift(-3),tier:"M",cat:"일",courage:4,stage:0,impact:null,reck:null,learned:""},
+    {id:7,title:"존경하는 사람에게 메일 보냄",date:shift(-1),tier:"M",cat:"사람",courage:5,stage:0,impact:null,reck:null,learned:""},
+    {id:8,title:"2주 쉬고 다시 달림",date:TODAY,tier:"S",cat:"나",courage:2,impact:1,reck:null,learned:"처음 10분이 전부였다."}
   ];
   nextId=9; save(); renderAll();
   document.querySelector('nav button[data-v="cal"]').click();
 }
 document.getElementById("demoBtn").onclick=()=>{
   if(!DATA.length) return loadDemo();
-  ask("Load sample entries?","This replaces everything currently logged. Export first if you want to keep it.","Replace with samples",loadDemo);
+  ask("예시로 채울까요?","지금 기록된 게 모두 사라져요. 남기고 싶으면 먼저 내보내기 하세요.","예시로 바꾸기",loadDemo);
 };
 document.getElementById("clrBtn").onclick=()=>{
-  if(!DATA.length) return notice("Nothing to clear","There are no entries yet.");
-  ask("Erase everything?",`This deletes all ${plural(DATA.length,"entry").replace("entrys","entries")} and can't be undone. Export first if you want a copy.`,"Erase everything",()=>{
-    DATA=[]; nextId=1; scope="last"; filter="All"; save(); renderAll();
+  if(!DATA.length) return notice("지울 게 없어요","아직 기록이 없어요.");
+  ask("전부 지울까요?",`기록 ${DATA.length}개가 모두 사라지고 되돌릴 수 없어요. 필요하면 먼저 내보내기 하세요.`,"전부 지우기",()=>{
+    DATA=[]; nextId=1; scope="last"; filter="전체"; save(); renderAll();
   });
 };
 document.getElementById("expBtn").onclick=()=>{
@@ -771,7 +771,7 @@ document.getElementById("impFile").onchange=e=>{
       if(!Array.isArray(p.DATA)) throw 0;
       DATA=p.DATA; nextId=p.nextId||DATA.length+1; if(p.weekGoal) weekGoal=p.weekGoal;
       save(); renderAll();
-    }catch(err){ notice("Couldn't read that file","It doesn't look like a Fail Freely export. Pick the .json file you downloaded with Export."); }
+    }catch(err){ notice("파일을 읽을 수 없어요","Fail Freely에서 내보낸 파일이 아닌 것 같아요. 내보내기로 받은 .json 파일을 골라주세요."); }
     e.target.value="";
   };
   rd.readAsText(f);
