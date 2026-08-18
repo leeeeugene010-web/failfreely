@@ -740,8 +740,7 @@ function renderIns(){
       <div class="stat">${Object.keys(CATS).map(c=>`
         <div class="brow"><span>${c}</span>
           <span class="track"><i style="width:${(counts[c]/max)*100}%;background:${col(c)}"></i></span>
-          <span class="num">${counts[c]}</span></div>
-        <p class="idesc" style="margin:-4px 0 14px 90px;font-size:11.5px">${CAT_HINT[c]}</p>`).join("")}</div>
+          <span class="num">${counts[c]}</span></div>`).join("")}</div>
     </section>
 
     <section class="isec">
